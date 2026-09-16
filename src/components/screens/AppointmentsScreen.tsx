@@ -48,37 +48,37 @@ export const AppointmentsScreen: React.FC = () => {
   }, [bookingList, filterStatus, selectedSuite, searchQuery]);
 
   return (
-    <div className="flex flex-col w-full max-w-[1600px] mx-auto">
+    <div className="flex flex-col w-full max-w-[1600px] mx-auto min-w-0">
       {/* Top Header & Breadcrumbs */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-1.5 text-[#625d5b] font-label-md text-[11px] uppercase tracking-wider">
-            <span>Clinical Operations</span>
-            <span className="material-symbols-outlined text-xs">chevron_right</span>
-            <span className="text-[#7b5808] font-semibold">Real-Time Scheduler &amp; Suites</span>
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 min-w-0">
+        <div className="flex flex-col gap-1 min-w-0 flex-1">
+          <div className="flex items-center gap-1.5 text-[#625d5b] font-label-md text-[11px] uppercase tracking-wider min-w-0">
+            <span className="shrink-0">Clinical Operations</span>
+            <span className="material-symbols-outlined text-xs shrink-0">chevron_right</span>
+            <span className="text-[#7b5808] font-semibold truncate">Real-Time Scheduler &amp; Suites</span>
           </div>
-          <h1 className="font-headline-lg text-3xl text-[#1b1c1a] tracking-tight">
+          <h1 className="font-headline-lg text-2xl sm:text-3xl text-[#1b1c1a] tracking-tight truncate">
             Appointments &amp; Treatment Suites
           </h1>
-          <p className="font-body-md text-sm text-[#4e4538] max-w-3xl">
+          <p className="font-body-md text-sm text-[#4e4538] max-w-3xl line-clamp-2 sm:line-clamp-none">
             Multi-provider clinical schedule, procedure room allocation, patient flow coordination,
             and SMS check-in status.
           </p>
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
           {/* Date Picker Bar */}
-          <div className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white border border-[#d2c5b2]/40 shadow-xs">
+          <div className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl bg-white border border-[#d2c5b2]/40 shadow-xs shrink-0">
             <button
               onClick={() => showToast('Navigated to previous clinical day')}
               className="p-1 rounded hover:bg-[#f5f3f0] text-[#625d5b] transition-colors"
             >
               <span className="material-symbols-outlined text-sm">chevron_left</span>
             </button>
-            <div className="flex items-center gap-1.5 px-2 text-xs font-semibold text-[#1b1c1a]">
-              <span className="material-symbols-outlined text-sm text-[#7b5808]">calendar_today</span>
-              <span>{currentDateStr}</span>
+            <div className="flex items-center gap-1.5 px-2 text-xs font-semibold text-[#1b1c1a] truncate">
+              <span className="material-symbols-outlined text-sm text-[#7b5808] shrink-0">calendar_today</span>
+              <span className="truncate">{currentDateStr}</span>
             </div>
             <button
               onClick={() => showToast('Navigated to next clinical day')}
@@ -320,44 +320,44 @@ export const AppointmentsScreen: React.FC = () => {
                     </td>
 
                     {/* Patient */}
-                    <td className="py-4 px-4">
-                      <div className="flex items-center gap-2.5">
+                    <td className="py-4 px-4 max-w-[200px]">
+                      <div className="flex items-center gap-2.5 min-w-0">
                         <div
-                          className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-xs ${
+                          className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-xs shrink-0 ${
                             b.avatarBg || 'bg-[#fbe7c4] text-[#7b5808]'
                           }`}
                         >
                           {b.initials}
                         </div>
-                        <div className="flex flex-col">
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-semibold text-xs text-[#1b1c1a] group-hover:text-[#7b5808]">
+                        <div className="flex flex-col min-w-0 flex-1">
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <span className="font-semibold text-xs text-[#1b1c1a] group-hover:text-[#7b5808] truncate max-w-[120px]">
                               {b.patientName}
                             </span>
-                            <span className="text-[9px] px-1 rounded bg-[#fae8c8] text-[#5e4200] font-bold">
+                            <span className="text-[9px] px-1 rounded bg-[#fae8c8] text-[#5e4200] font-bold shrink-0">
                               {b.tier}
                             </span>
                           </div>
-                          <span className="text-[10px] text-[#625d5b]">{b.phone}</span>
+                          <span className="text-[10px] text-[#625d5b] truncate">{b.phone}</span>
                         </div>
                       </div>
                     </td>
 
                     {/* Treatment */}
-                    <td className="py-4 px-4">
-                      <div className="flex flex-col">
-                        <span className="font-semibold text-[#1b1c1a] text-xs leading-snug">
+                    <td className="py-4 px-4 max-w-[220px]">
+                      <div className="flex flex-col min-w-0">
+                        <span className="font-semibold text-[#1b1c1a] text-xs leading-snug truncate" title={b.treatment}>
                           {b.treatment}
                         </span>
-                        <span className="text-[11px] text-[#625d5b]">{b.treatmentAddon}</span>
+                        <span className="text-[11px] text-[#625d5b] truncate" title={b.treatmentAddon}>{b.treatmentAddon}</span>
                       </div>
                     </td>
 
                     {/* Specialist & Suite */}
-                    <td className="py-4 px-4">
-                      <div className="flex flex-col">
-                        <span className="font-medium text-[#1b1c1a]">{b.specialist}</span>
-                        <span className="text-[11px] text-[#7b5808] font-medium">{b.suite}</span>
+                    <td className="py-4 px-4 max-w-[170px]">
+                      <div className="flex flex-col min-w-0">
+                        <span className="font-medium text-[#1b1c1a] truncate" title={b.specialist}>{b.specialist}</span>
+                        <span className="text-[11px] text-[#7b5808] font-medium truncate" title={b.suite}>{b.suite}</span>
                       </div>
                     </td>
 

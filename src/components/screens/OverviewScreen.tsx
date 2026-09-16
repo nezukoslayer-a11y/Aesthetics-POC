@@ -9,31 +9,31 @@ export const OverviewScreen: React.FC = () => {
   const lowStockItems = inventory.filter((i) => i.currentStock <= i.minThreshold);
 
   return (
-    <div className="flex flex-col w-full max-w-[1600px] mx-auto">
+    <div className="flex flex-col w-full max-w-[1600px] mx-auto min-w-0">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-1.5 text-[#625d5b] font-label-md text-[11px] uppercase tracking-wider">
-            <span>Executive Console</span>
-            <span className="material-symbols-outlined text-xs">chevron_right</span>
-            <span className="text-[#7b5808] font-semibold">Clinic Overview &amp; Live Operations</span>
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 min-w-0">
+        <div className="flex flex-col gap-1 min-w-0 flex-1">
+          <div className="flex items-center gap-1.5 text-[#625d5b] font-label-md text-[11px] uppercase tracking-wider min-w-0">
+            <span className="shrink-0">Executive Console</span>
+            <span className="material-symbols-outlined text-xs shrink-0">chevron_right</span>
+            <span className="text-[#7b5808] font-semibold truncate">Clinic Overview &amp; Live Operations</span>
           </div>
-          <h1 className="font-headline-lg text-3xl text-[#1b1c1a] tracking-tight">
+          <h1 className="font-headline-lg text-2xl sm:text-3xl text-[#1b1c1a] tracking-tight truncate">
             AuraPulse Clinical Dashboard
           </h1>
-          <p className="font-body-md text-sm text-[#4e4538] max-w-3xl">
+          <p className="font-body-md text-sm text-[#4e4538] max-w-3xl line-clamp-2 sm:line-clamp-none">
             Real-time multi-branch clinical performance, patient flow synchronization, treatment room
             utilization, and cold-chain compliance.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={() => setCurrentTab('appointments')}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#7b5808] text-white hover:bg-[#5e4200] font-label-lg text-xs transition-all shadow-md active:scale-95"
+            className="flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-[#7b5808] text-white hover:bg-[#5e4200] font-label-lg text-xs transition-all shadow-md active:scale-95"
           >
             <span className="material-symbols-outlined text-sm">calendar_month</span>
-            <span>View Today's Schedule</span>
+            <span className="truncate">View Today's Schedule</span>
           </button>
         </div>
       </div>
@@ -151,36 +151,36 @@ export const OverviewScreen: React.FC = () => {
               <div
                 key={b.id}
                 onClick={() => openBookingDrawer(b.id)}
-                className="p-3.5 rounded-xl bg-[#faf8f5] hover:bg-[#b88e3e]/10 border border-[#eee9e0] transition-colors cursor-pointer flex items-center justify-between gap-3"
+                className="p-3.5 rounded-xl bg-[#faf8f5] hover:bg-[#b88e3e]/10 border border-[#eee9e0] transition-colors cursor-pointer flex items-center justify-between gap-3 min-w-0"
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
                   <div
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs shadow-xs ${
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs shadow-xs shrink-0 ${
                       b.avatarBg || 'bg-[#fbe7c4] text-[#7b5808]'
                     }`}
                   >
                     {b.initials}
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold text-xs text-[#1b1c1a]">{b.patientName}</span>
-                      <span className="text-[9px] px-1.5 rounded bg-[#fae8c8] text-[#5e4200] font-bold">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="font-semibold text-xs text-[#1b1c1a] truncate max-w-[130px] sm:max-w-[180px]">{b.patientName}</span>
+                      <span className="text-[9px] px-1.5 rounded bg-[#fae8c8] text-[#5e4200] font-bold shrink-0">
                         {b.tier}
                       </span>
                     </div>
-                    <div className="text-[11px] text-[#625d5b] mt-0.5">
+                    <div className="text-[11px] text-[#625d5b] mt-0.5 truncate max-w-[180px] sm:max-w-[260px]">
                       {b.treatment} · {b.suite}
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 text-right">
-                  <div>
-                    <div className="text-xs font-bold text-[#7b5808]">{b.schedule}</div>
-                    <div className="text-[10px] text-[#625d5b]">{b.specialist}</div>
+                <div className="flex items-center gap-2 sm:gap-3 text-right shrink-0">
+                  <div className="min-w-0">
+                    <div className="text-xs font-bold text-[#7b5808] whitespace-nowrap">{b.schedule}</div>
+                    <div className="text-[10px] text-[#625d5b] truncate max-w-[90px] sm:max-w-[120px]">{b.specialist}</div>
                   </div>
                   <span
-                    className={`px-2 py-0.5 rounded-full font-label-sm text-[10px] font-bold ${
+                    className={`px-2 py-0.5 rounded-full font-label-sm text-[10px] font-bold shrink-0 ${
                       b.status === 'checked-in'
                         ? 'bg-emerald-100 text-emerald-800'
                         : 'bg-[#efeeeb] text-[#4e4538]'

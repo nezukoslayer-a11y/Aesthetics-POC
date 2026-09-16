@@ -71,47 +71,47 @@ export const PatientsScreen: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col w-full max-w-[1600px] mx-auto">
+    <div className="flex flex-col w-full max-w-[1600px] mx-auto min-w-0">
       {/* Top Sub-Header & Breadcrumb Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-1.5 text-[#625d5b] font-label-md text-[11px] uppercase tracking-wider">
-            <span>Patients &amp; Clients</span>
-            <span className="material-symbols-outlined text-xs">chevron_right</span>
-            <span className="text-[#7b5808] font-semibold">Patient Records Directory</span>
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 min-w-0">
+        <div className="flex flex-col gap-1 min-w-0 flex-1">
+          <div className="flex items-center gap-1.5 text-[#625d5b] font-label-md text-[11px] uppercase tracking-wider min-w-0">
+            <span className="shrink-0">Patients &amp; Clients</span>
+            <span className="material-symbols-outlined text-xs shrink-0">chevron_right</span>
+            <span className="text-[#7b5808] font-semibold truncate">Patient Records Directory</span>
           </div>
-          <h1 className="font-headline-lg text-3xl text-[#1b1c1a] tracking-tight">
+          <h1 className="font-headline-lg text-2xl sm:text-3xl text-[#1b1c1a] tracking-tight truncate">
             Patients &amp; Client Management
           </h1>
-          <p className="font-body-md text-sm text-[#4e4538] max-w-3xl">
+          <p className="font-body-md text-sm text-[#4e4538] max-w-3xl line-clamp-2 sm:line-clamp-none">
             Comprehensive medical aesthetics dossiers, digital consents, clinical injection notes,
             polarized photo archives, and cross-branch care records.
           </p>
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-3">
-          <div className="hidden xl:flex items-center gap-2 px-4 py-2 rounded-xl bg-[#f5f3f0] text-[#625d5b] font-label-sm text-[11px] border border-[#d2c5b2]/30">
-            <span className="inline-block w-2 h-2 rounded-full bg-[#7b5808] animate-pulse" />
-            <span>Cross-Branch EHR Sync: Active (3 Branches)</span>
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+          <div className="hidden xl:flex items-center gap-2 px-4 py-2 rounded-xl bg-[#f5f3f0] text-[#625d5b] font-label-sm text-[11px] border border-[#d2c5b2]/30 truncate">
+            <span className="inline-block w-2 h-2 rounded-full bg-[#7b5808] animate-pulse shrink-0" />
+            <span className="truncate">Cross-Branch EHR Sync: Active (3 Branches)</span>
           </div>
 
           <button
             id="exportDirectoryBtn"
             onClick={handleExport}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-[#efeeeb] text-[#1b1c1a] font-label-lg text-xs transition-all border border-[#d2c5b2]/40 shadow-xs active:scale-95"
+            className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-white hover:bg-[#efeeeb] text-[#1b1c1a] font-label-lg text-xs transition-all border border-[#d2c5b2]/40 shadow-xs active:scale-95 shrink-0"
           >
             <span className="material-symbols-outlined text-sm text-[#625d5b]">file_download</span>
-            <span>Export Directory</span>
+            <span className="truncate">Export Directory</span>
           </button>
 
           <button
             id="newPatientBtn"
             onClick={() => setIsNewPatientModalOpen(true)}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#7b5808] text-white hover:bg-[#5e4200] font-label-lg text-xs transition-all shadow-md active:scale-95"
+            className="flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-[#7b5808] text-white hover:bg-[#5e4200] font-label-lg text-xs transition-all shadow-md active:scale-95 shrink-0"
           >
             <span className="material-symbols-outlined text-sm">person_add</span>
-            <span>+ New Patient Registration</span>
+            <span className="truncate">+ New Patient Registration</span>
           </button>
         </div>
       </div>
@@ -361,22 +361,22 @@ export const PatientsScreen: React.FC = () => {
                     }`}
                   >
                     {/* Column 1: Patient & MRN */}
-                    <td className="py-4 px-5">
-                      <div className="flex items-center gap-3">
+                    <td className="py-4 px-5 max-w-[240px]">
+                      <div className="flex items-center gap-3 min-w-0">
                         <div
-                          className={`relative w-10 h-10 rounded-full flex items-center justify-center font-headline-md font-bold text-sm border shadow-xs ${
+                          className={`relative w-10 h-10 rounded-full flex items-center justify-center font-headline-md font-bold text-sm border shadow-xs shrink-0 ${
                             p.avatarBg || 'bg-[#fbe7c4] text-[#7b5808] border-[#ecd2a0]'
                           }`}
                         >
                           {p.initials}
                         </div>
-                        <div className="flex flex-col">
-                          <div className="flex items-center gap-2">
-                            <span className="font-title-md text-sm text-[#1b1c1a] font-semibold group-hover:text-[#7b5808] transition-colors">
+                        <div className="flex flex-col min-w-0 flex-1">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <span className="font-title-md text-sm text-[#1b1c1a] font-semibold group-hover:text-[#7b5808] transition-colors truncate max-w-[130px] sm:max-w-[180px]">
                               {p.name}
                             </span>
                             <span
-                              className={`px-1.5 py-0.5 rounded font-label-sm text-[9px] font-bold uppercase tracking-wider ${
+                              className={`px-1.5 py-0.5 rounded font-label-sm text-[9px] font-bold uppercase tracking-wider shrink-0 ${
                                 p.tier === 'VIP BLACK'
                                   ? 'bg-[#fae8c8] text-[#5e4200]'
                                   : p.tier === 'PLATINUM'
@@ -391,7 +391,7 @@ export const PatientsScreen: React.FC = () => {
                               {p.tier}
                             </span>
                           </div>
-                          <span className="text-[#625d5b] font-label-sm text-[11px]">
+                          <span className="text-[#625d5b] font-label-sm text-[11px] truncate">
                             #{p.mrn} · {p.visitsCount} Visits
                           </span>
                         </div>
@@ -399,10 +399,10 @@ export const PatientsScreen: React.FC = () => {
                     </td>
 
                     {/* Column 2: Demographics */}
-                    <td className="py-4 px-4">
+                    <td className="py-4 px-4 whitespace-nowrap">
                       <div className="flex flex-col">
-                        <span className="text-[#1b1c1a] font-medium">{p.phone}</span>
-                        <span className="text-[#625d5b] text-[11px]">
+                        <span className="text-[#1b1c1a] font-medium truncate">{p.phone}</span>
+                        <span className="text-[#625d5b] text-[11px] truncate">
                           {p.age} yrs · {p.gender} {p.pronouns ? `(${p.pronouns})` : ''}
                         </span>
                       </div>
@@ -410,25 +410,25 @@ export const PatientsScreen: React.FC = () => {
 
                     {/* Column 3: Clinical Alerts */}
                     <td className="py-4 px-4">
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-1.5 max-w-[200px]">
                         {p.clinicalAlerts.length > 0 ? (
                           p.clinicalAlerts.map((alert, idx) => (
                             <span
                               key={idx}
-                              className={`px-2 py-0.5 rounded font-label-sm text-[10px] flex items-center gap-1 font-medium ${
+                              className={`px-2 py-0.5 rounded font-label-sm text-[10px] flex items-center gap-1 font-medium truncate max-w-full ${
                                 alert.type === 'allergy' || alert.type === 'warning'
                                   ? 'bg-[#ffdad6] text-[#93000a]'
                                   : 'bg-[#efeeeb] text-[#625d5b]'
                               }`}
                             >
                               {(alert.type === 'allergy' || alert.type === 'warning') && (
-                                <span className="material-symbols-outlined text-[11px]">warning</span>
+                                <span className="material-symbols-outlined text-[11px] shrink-0">warning</span>
                               )}
-                              {alert.label}
+                              <span className="truncate">{alert.label}</span>
                             </span>
                           ))
                         ) : (
-                          <span className="px-2 py-0.5 rounded bg-[#efeeeb] text-[#625d5b] font-label-sm text-[10px]">
+                          <span className="px-2 py-0.5 rounded bg-[#efeeeb] text-[#625d5b] font-label-sm text-[10px] truncate">
                             No Known Allergies
                           </span>
                         )}
@@ -436,10 +436,10 @@ export const PatientsScreen: React.FC = () => {
                     </td>
 
                     {/* Column 4: Last Visit & Clinician */}
-                    <td className="py-4 px-4">
-                      <div className="flex flex-col">
-                        <span className="text-[#1b1c1a] font-medium">{p.lastVisitDate}</span>
-                        <span className="text-[#7b5808] text-[11px] font-medium">
+                    <td className="py-4 px-4 max-w-[180px]">
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-[#1b1c1a] font-medium whitespace-nowrap">{p.lastVisitDate}</span>
+                        <span className="text-[#7b5808] text-[11px] font-medium truncate" title={p.clinician}>
                           {p.clinician}
                         </span>
                       </div>

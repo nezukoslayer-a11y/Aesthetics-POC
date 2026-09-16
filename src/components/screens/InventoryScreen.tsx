@@ -45,47 +45,47 @@ export const InventoryScreen: React.FC = () => {
   const lowStockCount = inventory.filter((i) => i.currentStock <= i.minThreshold).length;
 
   return (
-    <div className="flex flex-col w-full max-w-[1600px] mx-auto">
+    <div className="flex flex-col w-full max-w-[1600px] mx-auto min-w-0">
       {/* Header & Breadcrumbs */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-1.5 text-[#625d5b] font-label-md text-[11px] uppercase tracking-wider">
-            <span>Operations &amp; Supply</span>
-            <span className="material-symbols-outlined text-xs">chevron_right</span>
-            <span className="text-[#7b5808] font-semibold">Cold-Chain &amp; Consumables</span>
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 min-w-0">
+        <div className="flex flex-col gap-1 min-w-0 flex-1">
+          <div className="flex items-center gap-1.5 text-[#625d5b] font-label-md text-[11px] uppercase tracking-wider min-w-0">
+            <span className="shrink-0">Operations &amp; Supply</span>
+            <span className="material-symbols-outlined text-xs shrink-0">chevron_right</span>
+            <span className="text-[#7b5808] font-semibold truncate">Cold-Chain &amp; Consumables</span>
           </div>
-          <h1 className="font-headline-lg text-3xl text-[#1b1c1a] tracking-tight">
+          <h1 className="font-headline-lg text-2xl sm:text-3xl text-[#1b1c1a] tracking-tight truncate">
             Inventory &amp; Medical Supply Ledger
           </h1>
-          <p className="font-body-md text-sm text-[#4e4538] max-w-3xl">
+          <p className="font-body-md text-sm text-[#4e4538] max-w-3xl line-clamp-2 sm:line-clamp-none">
             Cold-chain pharmaceutical tracking (2–8°C), injectables batch verification, auto-reorder
             thresholds, and disposal audit logging.
           </p>
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-3">
-          <div className="hidden xl:flex items-center gap-2 px-4 py-2 rounded-xl bg-[#f5f3f0] text-[#625d5b] font-label-sm text-[11px] border border-[#d2c5b2]/30">
-            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-            <span>Vault A: 3.4°C · Vault B: 2.8°C · Vault C: 3.1°C (Optimal)</span>
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+          <div className="hidden xl:flex items-center gap-2 px-4 py-2 rounded-xl bg-[#f5f3f0] text-[#625d5b] font-label-sm text-[11px] border border-[#d2c5b2]/30 truncate">
+            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse shrink-0" />
+            <span className="truncate">Vault A: 3.4°C · Vault B: 2.8°C · Vault C: 3.1°C (Optimal)</span>
           </div>
 
           <button
             id="auditInventoryBtn"
             onClick={() => showToast('Cycle count audit mode started. Select item to reconcile.', 'info')}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-[#efeeeb] text-[#1b1c1a] font-label-lg text-xs transition-all border border-[#d2c5b2]/40 shadow-xs active:scale-95"
+            className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-white hover:bg-[#efeeeb] text-[#1b1c1a] font-label-lg text-xs transition-all border border-[#d2c5b2]/40 shadow-xs active:scale-95 shrink-0"
           >
             <span className="material-symbols-outlined text-sm text-[#625d5b]">verified_user</span>
-            <span>Audit Cycle Count</span>
+            <span className="truncate">Audit Cycle Count</span>
           </button>
 
           <button
             id="receiveShipmentBtn"
             onClick={() => showToast('Opening PO & Supplier Inbound Scanner...', 'info')}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#7b5808] text-white hover:bg-[#5e4200] font-label-lg text-xs transition-all shadow-md active:scale-95"
+            className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-[#7b5808] text-white hover:bg-[#5e4200] font-label-lg text-xs transition-all shadow-md active:scale-95 shrink-0"
           >
             <span className="material-symbols-outlined text-sm">local_shipping</span>
-            <span>+ Inbound Stock Delivery</span>
+            <span className="truncate">+ Inbound Stock Delivery</span>
           </button>
         </div>
       </div>
@@ -302,28 +302,28 @@ export const InventoryScreen: React.FC = () => {
                     }`}
                   >
                     {/* Product & SKU */}
-                    <td className="py-4 px-5">
-                      <div className="flex items-center gap-3">
+                    <td className="py-4 px-5 max-w-[280px]">
+                      <div className="flex items-center gap-3 min-w-0">
                         <div className="w-9 h-9 rounded-lg bg-[#faf7f2] border border-[#e7e0d3] flex items-center justify-center text-[#7b5808] shrink-0 shadow-xs">
                           <span className="material-symbols-outlined text-lg">
                             {item.coldChainRequired ? 'vaccines' : 'inventory_2'}
                           </span>
                         </div>
-                        <div className="flex flex-col">
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-semibold text-xs text-[#1b1c1a] group-hover:text-[#7b5808]">
+                        <div className="flex flex-col min-w-0 flex-1">
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <span className="font-semibold text-xs text-[#1b1c1a] group-hover:text-[#7b5808] truncate max-w-[180px]" title={item.name}>
                               {item.name}
                             </span>
                             {item.coldChainRequired && (
                               <span
-                                className="material-symbols-outlined text-blue-600 text-xs"
+                                className="material-symbols-outlined text-blue-600 text-xs shrink-0"
                                 title="Cold Chain Required (2–8°C)"
                               >
                                 ac_unit
                               </span>
                             )}
                           </div>
-                          <span className="font-mono text-[10px] text-[#7b5808] font-bold">
+                          <span className="font-mono text-[10px] text-[#7b5808] font-bold truncate">
                             {item.sku} · {item.supplier}
                           </span>
                         </div>

@@ -21,22 +21,26 @@ import { GlobalCommandPalette } from './components/GlobalCommandPalette';
 import { ToastContainer } from './components/ToastContainer';
 
 const MainAppLayout: React.FC = () => {
-  const { currentTab } = useAuraPulse();
+  const { currentTab, isSidebarCollapsed } = useAuraPulse();
 
   return (
     <div className="min-h-screen bg-[#fbf9f6] text-[#1b1c1a] flex font-body-md selection:bg-[#ffdea8] selection:text-[#271900]">
       {/* Fixed Luxury Clinical Sidebar */}
       <Sidebar />
 
-      {/* Main Container */}
-      <div className="flex-1 flex flex-col pl-72 min-w-0">
+      {/* Main Container with dynamic padding based on sidebar collapsed state */}
+      <div
+        className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out pl-0 ${
+          isSidebarCollapsed ? 'md:pl-20' : 'md:pl-72'
+        }`}
+      >
         {/* Fixed Header Bar */}
         <Header />
 
         {/* Dynamic Screen View Content */}
         <main
           id="mainContentArea"
-          className="flex-1 pt-24 px-6 md:px-8 pb-16 max-w-full overflow-x-hidden"
+          className="flex-1 pt-24 px-4 sm:px-6 md:px-8 pb-16 max-w-full overflow-x-hidden min-w-0"
         >
           {currentTab === 'patients' && <PatientsScreen />}
           {currentTab === 'appointments' && <AppointmentsScreen />}

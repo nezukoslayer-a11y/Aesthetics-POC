@@ -43,38 +43,38 @@ export const TreatmentsScreen: React.FC = () => {
   }, [procedureList, activeCategory, credentialFilter, searchQuery]);
 
   return (
-    <div className="flex flex-col w-full max-w-[1600px] mx-auto">
+    <div className="flex flex-col w-full max-w-[1600px] mx-auto min-w-0">
       {/* Header & Breadcrumb */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-1.5 text-[#625d5b] font-label-md text-[11px] uppercase tracking-wider">
-            <span>Clinical Core</span>
-            <span className="material-symbols-outlined text-xs">chevron_right</span>
-            <span className="text-[#7b5808] font-semibold">Master Procedure Protocols</span>
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 min-w-0">
+        <div className="flex flex-col gap-1 min-w-0 flex-1">
+          <div className="flex items-center gap-1.5 text-[#625d5b] font-label-md text-[11px] uppercase tracking-wider min-w-0">
+            <span className="shrink-0">Clinical Core</span>
+            <span className="material-symbols-outlined text-xs shrink-0">chevron_right</span>
+            <span className="text-[#7b5808] font-semibold truncate">Master Procedure Protocols</span>
           </div>
-          <h1 className="font-headline-lg text-3xl text-[#1b1c1a] tracking-tight">
+          <h1 className="font-headline-lg text-2xl sm:text-3xl text-[#1b1c1a] tracking-tight truncate">
             Service &amp; Procedure Protocols
           </h1>
-          <p className="font-body-md text-sm text-[#4e4538] max-w-3xl">
+          <p className="font-body-md text-sm text-[#4e4538] max-w-3xl line-clamp-2 sm:line-clamp-none">
             Standardized clinical pathways, energy device parameters, consumable BOM deduction, CPT
             billing rules, and multi-branch fee schedules.
           </p>
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-3">
-          <div className="hidden xl:flex items-center gap-2 px-4 py-2 rounded-xl bg-[#f5f3f0] text-[#625d5b] font-label-sm text-[11px] border border-[#d2c5b2]/30">
-            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-            <span>48 Protocols Validated Across 3 Facilities</span>
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+          <div className="hidden xl:flex items-center gap-2 px-4 py-2 rounded-xl bg-[#f5f3f0] text-[#625d5b] font-label-sm text-[11px] border border-[#d2c5b2]/30 truncate">
+            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse shrink-0" />
+            <span className="truncate">48 Protocols Validated Across 3 Facilities</span>
           </div>
 
           <button
             id="newTreatmentBtn"
             onClick={() => setIsNewTreatmentModalOpen(true)}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#7b5808] text-white hover:bg-[#5e4200] font-label-lg text-xs transition-all shadow-md active:scale-95"
+            className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-[#7b5808] text-white hover:bg-[#5e4200] font-label-lg text-xs transition-all shadow-md active:scale-95 shrink-0"
           >
             <span className="material-symbols-outlined text-sm">add_circle</span>
-            <span>+ New Procedure Protocol</span>
+            <span className="truncate">+ New Procedure Protocol</span>
           </button>
         </div>
       </div>
@@ -365,8 +365,8 @@ export const TreatmentsScreen: React.FC = () => {
           })}
         </div>
       ) : (
-        <div className="rounded-xl bg-white border border-[#d2c5b2]/30 shadow-xs overflow-hidden mb-6">
-          <table className="w-full text-left border-collapse">
+        <div className="rounded-xl bg-white border border-[#d2c5b2]/30 shadow-xs overflow-x-auto min-w-0 mb-6">
+          <table className="w-full min-w-[700px] text-left border-collapse">
             <thead>
               <tr className="bg-[#f5f3f0]/70 text-[#625d5b] font-label-sm text-[11px] uppercase tracking-wider border-b border-[#d2c5b2]/30">
                 <th className="py-3.5 px-5 font-semibold">Protocol ID &amp; Name</th>
@@ -384,9 +384,9 @@ export const TreatmentsScreen: React.FC = () => {
                   onClick={() => openProcedureDrawer(proc.id)}
                   className="hover:bg-[#b88e3e]/10 transition-colors cursor-pointer group"
                 >
-                  <td className="py-4 px-5">
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-xs text-[#1b1c1a] group-hover:text-[#7b5808]">
+                  <td className="py-4 px-5 max-w-[260px]">
+                    <div className="flex flex-col min-w-0">
+                      <span className="font-semibold text-xs text-[#1b1c1a] group-hover:text-[#7b5808] truncate" title={proc.title}>
                         {proc.title}
                       </span>
                       <span className="font-mono text-[10px] text-[#7b5808] font-bold">
@@ -394,30 +394,30 @@ export const TreatmentsScreen: React.FC = () => {
                       </span>
                     </div>
                   </td>
-                  <td className="py-4 px-4">
-                    <div className="flex flex-col">
-                      <span className="font-medium text-[#1b1c1a]">{proc.modality}</span>
-                      <span className="text-[#625d5b] text-[11px]">{proc.cpt}</span>
+                  <td className="py-4 px-4 max-w-[180px]">
+                    <div className="flex flex-col min-w-0">
+                      <span className="font-medium text-[#1b1c1a] truncate">{proc.modality}</span>
+                      <span className="text-[#625d5b] text-[11px] truncate">{proc.cpt}</span>
                     </div>
                   </td>
-                  <td className="py-4 px-4">
+                  <td className="py-4 px-4 whitespace-nowrap">
                     <span className="font-medium text-[#1b1c1a]">{proc.duration}</span>
                   </td>
-                  <td className="py-4 px-4">
+                  <td className="py-4 px-4 whitespace-nowrap">
                     <span className="font-bold text-[#7b5808]">{proc.fee}</span>
                   </td>
-                  <td className="py-4 px-4">
-                    <span className="px-2 py-0.5 rounded bg-[#efeeeb] text-[#4e4538] font-label-sm text-[10px]">
+                  <td className="py-4 px-4 max-w-[140px]">
+                    <span className="px-2 py-0.5 rounded bg-[#efeeeb] text-[#4e4538] font-label-sm text-[10px] truncate inline-block max-w-full">
                       {proc.eligibility}
                     </span>
                   </td>
-                  <td className="py-4 px-5 text-right">
+                  <td className="py-4 px-5 text-right whitespace-nowrap">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         openProcedureDrawer(proc.id);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-[#f5f3f0] hover:bg-[#b88e3e] text-[#625d5b] hover:text-white text-[11px] font-semibold transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-[#f5f3f0] hover:bg-[#b88e3e] text-[#625d5b] hover:text-white text-[11px] font-semibold transition-colors shrink-0"
                     >
                       Configure Protocol
                     </button>

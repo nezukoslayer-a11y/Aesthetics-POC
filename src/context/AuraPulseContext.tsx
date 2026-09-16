@@ -78,6 +78,14 @@ interface AuraPulseContextType {
   toasts: Toast[];
   showToast: (message: string, type?: 'success' | 'info' | 'warning' | 'error') => void;
   dismissToast: (id: string) => void;
+
+  // Responsive Collapsible Sidebar
+  isSidebarCollapsed: boolean;
+  setIsSidebarCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleSidebar: () => void;
+  isMobileSidebarOpen: boolean;
+  setIsMobileSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleMobileSidebar: () => void;
 }
 
 const AuraPulseContext = createContext<AuraPulseContextType | undefined>(undefined);
@@ -85,6 +93,39 @@ const AuraPulseContext = createContext<AuraPulseContextType | undefined>(undefin
 export const AuraPulseProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTab, setCurrentTab] = useState<NavigationTab>('patients');
   const [currentBranch, setCurrentBranch] = useState<string>('Main Clinic - Branch A');
+
+  // Sidebar collapsible state: default to collapsed on mobile and tablet (< 1024px)
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 1024;
+    }
+    return false;
+  });
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarCollapsed((prev) => !prev);
+  };
+
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen((prev) => !prev);
+  };
+
+  // Automatically adjust on viewport resize to enforce tablet/mobile collapse
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 1024) {
+        setIsSidebarCollapsed(true);
+      }
+      if (width >= 768) {
+        setIsMobileSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Patients state
   const [patients, setPatients] = useState<PatientRecord[]>(() => {
@@ -430,6 +471,13 @@ export const AuraPulseProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         toasts,
         showToast,
         dismissToast,
+
+        isSidebarCollapsed,
+        setIsSidebarCollapsed,
+        toggleSidebar,
+        isMobileSidebarOpen,
+        setIsMobileSidebarOpen,
+        toggleMobileSidebar,
       }}
     >
       {children}
